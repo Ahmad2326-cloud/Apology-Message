@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Penguin 🐧❤️</title>
+<style>
+    body {
+        background: linear-gradient(to bottom, #dff6ff, #a2d2ff);
+        font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+        color: #003049;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    h1 {
+        font-size: 2em;
+        margin-top: 50px;
+    }
+    p {
+        font-size: 1.2em;
+        margin: 20px auto;
+        width: 80%;
+    }
+    button {
+        background-color: #ffb703;
+        border: none;
+        padding: 15px 25px;
+        font-size: 1em;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    button:hover {
+        background-color: #fb8500;
+    }
+    .penguin {
+        font-size: 3em;
+        margin: 10px;
+    }
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+
+<canvas id="snow"></canvas>
+
+<h1>🐧 For My Penguin 🐧</h1>
+<p>Dear Adan,<br>
+Every moment with you feels like the warmest hug in the coldest winter.  
+You’re my penguin, my safe place, my forever. ❤️</p>
+
+<div class="penguin">🐧🐧🐧</div>
+
+<button onclick="playMusic()">Click to Play Our Song 🎶</button>
+
+<audio id="song" src="YOUR-SONG-FILE.mp3"></audio>
+
+<script>
+    // Snowfall animation
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let flakes = [];
+
+    function snow() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < flakes.length; i++) {
+            let flake = flakes[i];
+            flake.y += flake.speed;
+            if (flake.y > canvas.height) {
+                flakes[i] = { x: Math.random() * canvas.width, y: 0, r: flake.r, speed: flake.speed };
+            }
+            ctx.beginPath();
+            ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+            ctx.fillStyle = "white";
+            ctx.fill();
+        }
+        requestAnimationFrame(snow);
+    }
+
+    function initSnow() {
+        for (let i = 0; i < 100; i++) {
+            flakes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 4 + 1,
+                speed: Math.random() * 1 + 0.5
+            });
+        }
+        snow();
+    }
+
+    initSnow();
+
+    // Music
+    function playMusic() {
+        document.getElementById('song').play();
+    }
+</script>
+
+</body>
+</html>
